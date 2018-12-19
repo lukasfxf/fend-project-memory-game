@@ -32,13 +32,17 @@ function toggleCard(target) {
 
 function addOpenCard(target) {
     openCards.push(target);
+    console.log(openCards);
 };
 
 deck.addEventListener('click', function(evt) {
     const target = evt.target;
-    if (target.classList.contains('card')) {
+    if (target.classList.contains('card') && openCards.length < 2) {
         toggleCard(target);
         addOpenCard(target);
+        if (openCards.length == 2) {
+            console.log('2 cards');
+        }
     }
 });
 

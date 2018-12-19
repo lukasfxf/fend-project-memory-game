@@ -1,8 +1,8 @@
 /*
- * Create a list that holds all of your cards
- */
+ * Create a list that holds all of your cards*/
+// the "Array.from" method transform the nodeList with all the list elements in the document in a array
+const cardsList = Array.from(document.querySelectorAll('.deck li'));
 let openCards = [];
-
 const deck = document.querySelector('.deck');
 
 /*
@@ -27,6 +27,15 @@ function shuffle(array) {
     return array;
 };
 
+// function to iterate true each card item and add then to the deck 
+function shuffleDeck() {
+    const shuffleCards = shuffle(cardsList);
+    for(card of shuffleCards) {
+        deck.appendChild(card);
+    }
+};
+shuffleDeck();
+
 // function to open or close the card
 function toggleCard(card) {
     card.classList.toggle('open');
@@ -37,13 +46,13 @@ function toggleCard(card) {
 function addOpenCard(card) {
     openCards.push(card);
 };
-// function of the match condition
+// function of the "match" condition
 function match() {
     openCards[0].classList.toggle('match');
     openCards[1].classList.toggle('match');
     openCards = [];
 };
-// function of the not a match condition
+// function of the "not a match" condition
 function notMatch() {
     setTimeout(function() {
     toggleCard(openCards[0]);

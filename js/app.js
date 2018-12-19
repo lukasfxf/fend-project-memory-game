@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards*/
 // the "Array.from" method transform the nodeList with all the list elements in the document in a array
-const cardsList = Array.from(document.querySelectorAll('.deck li'));
+const cardsList = Array.from(document.querySelectorAll('.card'));
 let openCards = [];
 const deck = document.querySelector('.deck');
 

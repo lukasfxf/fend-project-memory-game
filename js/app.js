@@ -64,7 +64,12 @@ function checkMatch() {
 // event listener to a click in the cards
 deck.addEventListener('click', function(evt) {
     const target = evt.target;
-    if (target.classList.contains('card') && !target.classList.contains('match') && openCards.length < 2 && !openCards.includes(target)) {
+    if (
+        target.classList.contains('card') &&
+        !target.classList.contains('match') && 
+        openCards.length < 2 && 
+        !openCards.includes(target)
+        ) {
         toggleCard(target);
         addOpenCard(target);
         if (openCards.length == 2) {

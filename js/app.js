@@ -23,12 +23,17 @@ function shuffle(array) {
     }
 
     return array;
-}
+};
+
+function openCard(target) {
+    target.classList.toggle('open');
+    target.classList.toggle('show');
+};
 
 deck.addEventListener('click', function(evt) {
     const target = evt.target;
     if (target.classList.contains('card')) {
-        
+        openCard(target);
     }
 });
 

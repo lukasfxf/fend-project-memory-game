@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
-
+const deck = document.querySelector('.deck');
 
 /*
  * Display the cards on the page
@@ -25,6 +25,12 @@ function shuffle(array) {
     return array;
 }
 
+deck.addEventListener('click', function(evt) {
+    const target = evt.target;
+    if (target.classList.contains('card')) {
+        
+    }
+});
 
 /*
  * set up the event listener for a card. If a card is clicked:

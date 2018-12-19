@@ -2,7 +2,7 @@
  * Create a list that holds all of your cards
  */
 const deck = document.querySelector('.deck');
-
+let openCards = [];
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -25,15 +25,20 @@ function shuffle(array) {
     return array;
 };
 
-function openCard(target) {
+function toggleCard(target) {
     target.classList.toggle('open');
     target.classList.toggle('show');
+};
+
+function addOpenCard(target) {
+    openCards.push(target);
 };
 
 deck.addEventListener('click', function(evt) {
     const target = evt.target;
     if (target.classList.contains('card')) {
-        openCard(target);
+        toggleCard(target);
+        addOpenCard(target);
     }
 });
 

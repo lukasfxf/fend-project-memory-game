@@ -1,8 +1,10 @@
 /*
  * Create a list that holds all of your cards
  */
-const deck = document.querySelector('.deck');
 let openCards = [];
+
+const deck = document.querySelector('.deck');
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -24,24 +26,24 @@ function shuffle(array) {
 
     return array;
 };
-
+// function to open or close the card
 function toggleCard(target) {
     target.classList.toggle('open');
     target.classList.toggle('show');
 };
-
+// function to push a open card to the array 
 function addOpenCard(target) {
     openCards.push(target);
     console.log(openCards);
 };
-
+// event listener to a click in the cards
 deck.addEventListener('click', function(evt) {
     const target = evt.target;
     if (target.classList.contains('card') && openCards.length < 2) {
         toggleCard(target);
         addOpenCard(target);
         if (openCards.length == 2) {
-            console.log('2 cards');
+        
         }
     }
 });

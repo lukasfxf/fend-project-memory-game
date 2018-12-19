@@ -26,16 +26,41 @@ function shuffle(array) {
 
     return array;
 };
+
 // function to open or close the card
-function toggleCard(target) {
-    target.classList.toggle('open');
-    target.classList.toggle('show');
+function toggleCard(card) {
+    card.classList.toggle('open');
+    card.classList.toggle('show');
 };
+
 // function to push a open card to the array 
-function addOpenCard(target) {
-    openCards.push(target);
-    console.log(openCards);
+function addOpenCard(card) {
+    openCards.push(card);
 };
+// function of the match condition
+function match() {
+    openCards[0].classList.toggle('match');
+    openCards[1].classList.toggle('match');
+    openCards = [];
+};
+// function of the not a match condition
+function notMatch() {
+    setTimeout(function() {
+    toggleCard(openCards[0]);
+    toggleCard(openCards[1]);
+    openCards = [];
+    }, 700)
+};
+
+// function to check the "match and not a match" condition 
+function checkMatch() {
+    if (openCards[0].firstElementChild.className === openCards[1].firstElementChild.className) {
+        match();
+    }else {
+        notMatch();
+    }
+};
+
 // event listener to a click in the cards
 deck.addEventListener('click', function(evt) {
     const target = evt.target;
@@ -43,7 +68,7 @@ deck.addEventListener('click', function(evt) {
         toggleCard(target);
         addOpenCard(target);
         if (openCards.length == 2) {
-        
+            checkMatch();
         }
     }
 });

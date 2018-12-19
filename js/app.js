@@ -1,16 +1,10 @@
 /*
  * Create a list that holds all of your cards*/
-// the "Array.from" method transform the nodeList with all the list elements in the document in a array
+// the "Array.from" method transform the nodeList, with all the list elements in the document, in a array
 const cardsList = Array.from(document.querySelectorAll('.card'));
-let openCards = [];
 const deck = document.querySelector('.deck');
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+let openCards = [];
+let moveCount = 0;
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -27,7 +21,7 @@ function shuffle(array) {
     return array;
 };
 
-// function to iterate true each card item and add then to the deck 
+// function to implement the shuffle function and iterate true each card item and add then to the deck 
 function shuffleDeck() {
     const shuffleCards = shuffle(cardsList);
     for(card of shuffleCards) {
@@ -46,6 +40,14 @@ function toggleCard(card) {
 function addOpenCard(card) {
     openCards.push(card);
 };
+
+// function to count and show the number of moves (2 open cards = 1 move)
+function moves() {
+    moveCount++;
+    const moveText = document.querySelector('.moves');
+    moveText.innerHTML = moveCount; 
+};
+
 // function of the "match" condition
 function match() {
     openCards[0].classList.toggle('match');
@@ -61,7 +63,7 @@ function notMatch() {
     }, 700)
 };
 
-// function to check the "match and not a match" condition 
+// function to check the "match or not a match" condition 
 function checkMatch() {
     if (openCards[0].firstElementChild.className === openCards[1].firstElementChild.className) {
         match();
@@ -83,11 +85,16 @@ deck.addEventListener('click', function(evt) {
         addOpenCard(target);
         if (openCards.length == 2) {
             checkMatch();
+            moves();
         }
     }
 });
 
 /*
+ * Display the cards on the page
+ *   - shuffle the list of cards using the provided "shuffle" method below
+ *   - loop through each card and create its HTML
+ *   - add each card's HTML to the page
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)

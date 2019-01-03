@@ -3,6 +3,7 @@
 // the "Array.from" method transform the nodeList, with all the list elements in the document, in a array
 const cardsList = Array.from(document.querySelectorAll('.card'));
 const deck = document.querySelector('.deck');
+const stars = document.querySelectorAll('.fa-star');
 let openCards = [];
 let moveCount = 0;
 
@@ -39,6 +40,23 @@ function toggleCard(card) {
 // function to push a open card to the array 
 function addOpenCard(card) {
     openCards.push(card);
+};
+
+// function to remove the stars depending on the move count
+function removeStar() {
+    for (star of stars) {
+        if (star.style.display !== 'none') {
+            star.style.display = 'none';
+            break;
+        }
+    }
+};
+
+//function to compare the logic condition and call the removeStar function
+function starRating() {
+    if (moveCount === 12 || moveCount === 20) {
+        removeStar();
+    }
 };
 
 // function to count and show the number of moves (2 open cards = 1 move)
@@ -86,6 +104,7 @@ deck.addEventListener('click', function(evt) {
         if (openCards.length == 2) {
             checkMatch();
             moves();
+            starRating();
         }
     }
 });

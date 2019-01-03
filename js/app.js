@@ -54,7 +54,7 @@ function removeStar() {
 
 //function to compare the logic condition and call the removeStar function
 function starRating() {
-    if (moveCount === 12 || moveCount === 20) {
+    if (moveCount === 15 || moveCount === 23) {
         removeStar();
     }
 };

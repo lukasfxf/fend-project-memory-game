@@ -14,13 +14,17 @@ let timerOff = true;
 // Event listener to handler a click in the cards
 deck.addEventListener('click', function(evt) {
     const target = evt.target;
+        //this condition stop the timer from rushing and makes the stopTimer() function works
+        if (timerOff) {
+            startTimer();
+            timerOff = false;
+        }
         if (
         target.classList.contains('card') &&
         !target.classList.contains('match') && 
         openCards.length < 2 && 
         !openCards.includes(target)
         ) {
-            startTimer();
             toggleCard(target);
             addOpenCard(target);
         if (openCards.length == 2) {

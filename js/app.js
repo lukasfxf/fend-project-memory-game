@@ -4,8 +4,32 @@
 const cardsList = Array.from(document.querySelectorAll('.card'));
 const deck = document.querySelector('.deck');
 const stars = document.querySelectorAll('.fa-star');
+const timer = document.querySelector('.fa-clock-o');
 let openCards = [];
 let moveCount = 0;
+let time = 0;
+let timeHandler;
+let timerOff = true;
+
+// Event listener to handler a click in the cards
+deck.addEventListener('click', function(evt) {
+    const target = evt.target;
+        if (
+        target.classList.contains('card') &&
+        !target.classList.contains('match') && 
+        openCards.length < 2 && 
+        !openCards.includes(target)
+        ) {
+            startTimer();
+            toggleCard(target);
+            addOpenCard(target);
+        if (openCards.length == 2) {
+            checkMatch();
+            moves();
+            starRating();
+        }
+    }
+});
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -18,11 +42,10 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
     return array;
 };
 
-// function to implement the shuffle function and iterate true each card item and add then to the deck 
+// Implement the shuffle function and iterate true each card item and add then to the deck 
 function shuffleDeck() {
     const shuffleCards = shuffle(cardsList);
     for(card of shuffleCards) {
@@ -31,18 +54,18 @@ function shuffleDeck() {
 };
 shuffleDeck();
 
-// function to open or close the card
+// Open or close the cards
 function toggleCard(card) {
     card.classList.toggle('open');
     card.classList.toggle('show');
 };
 
-// function to push a open card to the array 
+// Push an open card on the array openCards[] 
 function addOpenCard(card) {
     openCards.push(card);
 };
 
-// function to remove the stars depending on the move count
+// Remove the stars 
 function removeStar() {
     for (star of stars) {
         if (star.style.display !== 'none') {
@@ -52,27 +75,40 @@ function removeStar() {
     }
 };
 
-//function to compare the logic condition and call the removeStar function
+// Remove star condiotional
 function starRating() {
     if (moveCount === 15 || moveCount === 23) {
         removeStar();
     }
 };
 
-// function to count and show the number of moves (2 open cards = 1 move)
+// count and show the number of moves in the board (2 open cards = 1 move)
 function moves() {
     moveCount++;
     const moveText = document.querySelector('.moves');
     moveText.innerHTML = moveCount; 
 };
 
-// function of the "match" condition
+// Start and display the timer on the board
+function startTimer() {
+    timeHandler = setInterval(function() {
+        time++;
+        timer.innerHTML = ` ${time} Seconds`;   
+    }, 1000);
+};
+    
+//Stop the timer 
+function stopTimer() {
+    clearInterval(timeHandler);
+};
+
+// Toggle a matched card in the open position
 function match() {
     openCards[0].classList.toggle('match');
     openCards[1].classList.toggle('match');
     openCards = [];
 };
-// function of the "not a match" condition
+// Toggle back a non matched card in the close position
 function notMatch() {
     setTimeout(function() {
     toggleCard(openCards[0]);
@@ -81,7 +117,7 @@ function notMatch() {
     }, 700)
 };
 
-// function to check the "match or not a match" condition 
+// Check the "match" or "notMatch" condition 
 function checkMatch() {
     if (openCards[0].firstElementChild.className === openCards[1].firstElementChild.className) {
         match();
@@ -89,25 +125,6 @@ function checkMatch() {
         notMatch();
     }
 };
-
-// event listener to a click in the cards
-deck.addEventListener('click', function(evt) {
-    const target = evt.target;
-    if (
-        target.classList.contains('card') &&
-        !target.classList.contains('match') && 
-        openCards.length < 2 && 
-        !openCards.includes(target)
-        ) {
-        toggleCard(target);
-        addOpenCard(target);
-        if (openCards.length == 2) {
-            checkMatch();
-            moves();
-            starRating();
-        }
-    }
-});
 
 /*
  * Display the cards on the page

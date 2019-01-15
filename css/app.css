@@ -112,3 +112,62 @@ h1 {
     margin-left: 4em;
     display: inline-block;
 }
+
+/*
+ * Styles for the modal
+ */
+
+ .hide {
+     display: none;
+ }
+
+.modal-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.438);
+}
+
+.modal-background .modal-body {
+    position: relative;
+    width: 40%;
+    top: 50%;
+    left: 50%;
+    background: #ffffff;
+    transform: translate(-50%, -70%);
+}
+
+.modal-background .modal-body .modal-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid gray;
+    padding: 0 1.5rem;
+}
+
+.modal-background .modal-body .modal-heading .modal-close {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.modal-background .modal-body .modal-stats {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-bottom: 1px solid grey;
+    padding: 1rem;
+}
+
+.modal-background .modal-body .modal-buttons {
+    display: flex;
+    padding: 1rem;
+    justify-content: space-around;
+}
+
+.modal-background .modal-body .modal-buttons .modal-button {
+    width: 60px;
+    height: 30px;
+}
+

@@ -3,13 +3,15 @@
 // the "Array.from" method transform the nodeList, with all the list elements in the document, in a array
 const cardsList = Array.from(document.querySelectorAll('.card'));
 const deck = document.querySelector('.deck');
-const stars = document.querySelectorAll('.fa-star');
 const timer = document.querySelector('.fa-clock-o');
+const cancelButton = document.querySelector('.modal-cancel');
+const replayButton = document.querySelector('.modal-replay');
 let openCards = [];
 let moveCount = 0;
 let time = 0;
 let timeHandler;
 let timerOff = true;
+let countStars = 3;
 
 // Event listener to handler a click in the cards
 deck.addEventListener('click', function(evt) {
@@ -33,6 +35,15 @@ deck.addEventListener('click', function(evt) {
             starRating();
         }
     }
+});
+
+// Event listeners to handler a click in the cancel and replay buttons on the modal
+cancelButton.addEventListener('click', function() {
+    toggleModal();
+});
+
+replayButton.addEventListener('click', function() {
+    //TODO: call the function to reset the game
 });
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -71,6 +82,7 @@ function addOpenCard(card) {
 
 // Remove the stars 
 function removeStar() {
+    const stars = document.querySelectorAll('.fa-star');
     for (star of stars) {
         if (star.style.display !== 'none') {
             star.style.display = 'none';
@@ -83,6 +95,7 @@ function removeStar() {
 function starRating() {
     if (moveCount === 15 || moveCount === 23) {
         removeStar();
+        countStars--;
     }
 };
 
@@ -97,7 +110,7 @@ function moves() {
 function startTimer() {
     timeHandler = setInterval(function() {
         time++;
-        timer.innerHTML = ` ${time} Seconds`;   
+        timer.innerHTML = ` ${time} Sec`;   
     }, 1000);
 };
     
@@ -128,6 +141,24 @@ function checkMatch() {
     }else {
         notMatch();
     }
+};
+
+//toggle the modal on and off
+function toggleModal() {
+    const modal = document.querySelector('.modal-background');
+    modal.classList.toggle('hide');
+    modalStats();
+};
+
+//show the game status on the modal
+function modalStats() {
+    const modalTime = document.querySelector('.modal-time');
+    const timerValue = timer.innerHTML;
+    const modalMoves = document.querySelector('.modal-moves');
+    const modalStars = document.querySelector('.modal-stars');
+    modalStars.innerHTML = `Stars = ${countStars}`;
+    modalTime.innerHTML = `Time = ${timerValue}`;
+    modalMoves.innerHTML = `Moves = ${moveCount}`;
 };
 
 /*

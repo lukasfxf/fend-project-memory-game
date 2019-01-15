@@ -110,8 +110,12 @@ function moves() {
 function startTimer() {
     timeHandler = setInterval(function() {
         time++;
-        timer.innerHTML = ` ${time} Sec`;   
+        displayTimer();   
     }, 1000);
+};
+
+function displayTimer() {
+    timer.innerHTML = ` ${time} Sec`;
 };
     
 //Stop the timer 
@@ -143,14 +147,14 @@ function checkMatch() {
     }
 };
 
-//toggle the modal on and off
+// toggle the modal on and off
 function toggleModal() {
     const modal = document.querySelector('.modal-background');
     modal.classList.toggle('hide');
     modalStats();
 };
 
-//show the game status on the modal
+// show the game status on the modal
 function modalStats() {
     const modalTime = document.querySelector('.modal-time');
     const timerValue = timer.innerHTML;
@@ -160,6 +164,11 @@ function modalStats() {
     modalTime.innerHTML = `Time = ${timerValue}`;
     modalMoves.innerHTML = `Moves = ${moveCount}`;
 };
+
+// Reset the Game
+function resetGame() {
+
+}; 
 
 /*
  * Display the cards on the page

@@ -4,10 +4,14 @@
 const cardsList = Array.from(document.querySelectorAll('.card'));
 const deck = document.querySelector('.deck');
 const timer = document.querySelector('.fa-clock-o');
+const moveText = document.querySelector('.moves');
+const stars = document.querySelectorAll('.fa-star');
 const cancelButton = document.querySelector('.modal-cancel');
 const replayButton = document.querySelector('.modal-replay');
+const resetButton = document.querySelector('.fa-repeat');
 let openCards = [];
 let moveCount = 0;
+let matched = 0;
 let time = 0;
 let timeHandler;
 let timerOff = true;
@@ -41,9 +45,13 @@ deck.addEventListener('click', function(evt) {
 cancelButton.addEventListener('click', function() {
     toggleModal();
 });
-
 replayButton.addEventListener('click', function() {
-    //TODO: call the function to reset the game
+    replayGame()
+});
+
+// Event listener to handler a clicl in the "Restart" Button
+resetButton.addEventListener('click', function() {
+    resetGame()
 });
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -82,7 +90,6 @@ function addOpenCard(card) {
 
 // Remove the stars 
 function removeStar() {
-    const stars = document.querySelectorAll('.fa-star');
     for (star of stars) {
         if (star.style.display !== 'none') {
             star.style.display = 'none';
@@ -102,7 +109,6 @@ function starRating() {
 // count and show the number of moves in the board (2 open cards = 1 move)
 function moves() {
     moveCount++;
-    const moveText = document.querySelector('.moves');
     moveText.innerHTML = moveCount; 
 };
 
@@ -142,6 +148,7 @@ function notMatch() {
 function checkMatch() {
     if (openCards[0].firstElementChild.className === openCards[1].firstElementChild.className) {
         match();
+        matched++;
     }else {
         notMatch();
     }
@@ -165,10 +172,38 @@ function modalStats() {
     modalMoves.innerHTML = `Moves = ${moveCount}`;
 };
 
+// Resete the game and toggle the modal off
+function replayGame() {
+    resetGame();
+    toggleModal();
+};
 // Reset the Game
 function resetGame() {
-
+    resetTimer();
+    resetMoves();
+    resetStars();
+    shuffleDeck();
 }; 
+
+// Reset the timer
+function resetTimer() {
+    stopTimer();
+    timerOff = true;
+    time = 0;
+    displayTimer();
+};
+
+function resetMoves() {
+    moveCount = 0;
+    moveText.innerHTML = moveCount;
+};
+
+function resetStars() {
+    countStars = 3;
+    for (star of stars) {
+        star.style.display = 'inline';
+    }
+};
 
 /*
  * Display the cards on the page

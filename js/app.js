@@ -9,6 +9,7 @@ const stars = document.querySelectorAll('.fa-star');
 const cancelButton = document.querySelector('.modal-cancel');
 const replayButton = document.querySelector('.modal-replay');
 const resetButton = document.querySelector('.fa-repeat');
+const winCount = 8;
 let openCards = [];
 let moveCount = 0;
 let matched = 0;
@@ -38,6 +39,9 @@ deck.addEventListener('click', function(evt) {
             moves();
             starRating();
         }
+        if (matched === winCount) {
+            winGame();
+        };
     }
 });
 
@@ -49,7 +53,7 @@ replayButton.addEventListener('click', function() {
     replayGame()
 });
 
-// Event listener to handler a clicl in the "Restart" Button
+// Event listener to handler a click in the "Restart" Button
 resetButton.addEventListener('click', function() {
     resetGame()
 });
@@ -112,7 +116,7 @@ function moves() {
     moveText.innerHTML = moveCount; 
 };
 
-// Start and display the timer on the board
+// Start the timer
 function startTimer() {
     timeHandler = setInterval(function() {
         time++;
@@ -120,6 +124,7 @@ function startTimer() {
     }, 1000);
 };
 
+// Display the timer
 function displayTimer() {
     timer.innerHTML = ` ${time} Sec`;
 };
@@ -154,6 +159,12 @@ function checkMatch() {
     }
 };
 
+// Win game function that stop the timer and show the modal
+function winGame() {
+    stopTimer();
+    toggleModal();
+};
+
 // toggle the modal on and off
 function toggleModal() {
     const modal = document.querySelector('.modal-background');
@@ -183,6 +194,8 @@ function resetGame() {
     resetMoves();
     resetStars();
     shuffleDeck();
+    resetCards();
+    matched = 0;
 }; 
 
 // Reset the timer
@@ -193,15 +206,24 @@ function resetTimer() {
     displayTimer();
 };
 
+// Reset the move counter
 function resetMoves() {
     moveCount = 0;
     moveText.innerHTML = moveCount;
 };
 
+// Reset the Stars counter
 function resetStars() {
     countStars = 3;
     for (star of stars) {
         star.style.display = 'inline';
+    }
+};
+
+// Reset the cards position
+function resetCards() {
+    for (card of cardsList) {
+        card.className = 'card';
     }
 };
 

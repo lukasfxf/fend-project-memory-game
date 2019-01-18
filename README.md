@@ -1,20 +1,38 @@
 # Memory Game Project
 
+A classic memory game project made for the Udacity front-end nanodegree
+
+
 ## Table of Contents
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+* [Instructions](#Instructions)
 
-## Instructions
+* [Technologies used](#Technologiesused)
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+* [Author](#Author)
 
-To get started, open `js/app.js` and start building out the app's functionality
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
 
-## Contributing
+## Instructions 
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+* Clone or download the project on your machine
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+* Click the index.html file
+
+* try to match all the pairs of cards and have fun
+
+
+
+## Technologies used
+
+
+* JavaScript
+
+* HTML
+
+* CSS
+
+
+## Author
+
+This project is created by Lucas Santos for the Udacity Front end Nanodegree program.

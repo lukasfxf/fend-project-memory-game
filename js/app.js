@@ -70,7 +70,7 @@ function shuffle(array) {
         array[randomIndex] = temporaryValue;
     }
     return array;
-};
+}
 
 // Implement the shuffle function and iterate true each card item and add then to the deck 
 function shuffleDeck() {
@@ -78,19 +78,19 @@ function shuffleDeck() {
     for(card of shuffleCards) {
         deck.appendChild(card);
     }
-};
+}
 shuffleDeck();
 
 // Open or close the cards
 function toggleCard(card) {
     card.classList.toggle('open');
     card.classList.toggle('show');
-};
+}
 
 // Push an open card on the array openCards[] 
 function addOpenCard(card) {
     openCards.push(card);
-};
+}
 
 // Remove the stars 
 function removeStar() {
@@ -100,7 +100,7 @@ function removeStar() {
             break;
         }
     }
-};
+}
 
 // Remove star condiotional
 function starRating() {
@@ -108,13 +108,13 @@ function starRating() {
         removeStar();
         countStars--;
     }
-};
+}
 
 // count and show the number of moves in the board (2 open cards = 1 move)
 function moves() {
     moveCount++;
     moveText.innerHTML = moveCount; 
-};
+}
 
 // Start the timer
 function startTimer() {
@@ -122,24 +122,25 @@ function startTimer() {
         time++;
         displayTimer();   
     }, 1000);
-};
+}
 
 // Display the timer
 function displayTimer() {
     timer.innerHTML = ` ${time} Sec`;
-};
+}
     
 //Stop the timer 
 function stopTimer() {
     clearInterval(timeHandler);
-};
+}
 
 // Toggle a matched card in the open position
 function match() {
     openCards[0].classList.toggle('match');
     openCards[1].classList.toggle('match');
     openCards = [];
-};
+}
+
 // Toggle back a non matched card in the close position
 function notMatch() {
     setTimeout(function() {
@@ -147,7 +148,7 @@ function notMatch() {
     toggleCard(openCards[1]);
     openCards = [];
     }, 700)
-};
+}
 
 // Check the "match" or "notMatch" condition 
 function checkMatch() {
@@ -157,20 +158,20 @@ function checkMatch() {
     }else {
         notMatch();
     }
-};
+}
 
 // Win game function that stop the timer and show the modal
 function winGame() {
     stopTimer();
     toggleModal();
-};
+}
 
 // toggle the modal on and off
 function toggleModal() {
     const modal = document.querySelector('.modal-background');
     modal.classList.toggle('hide');
     modalStats();
-};
+}
 
 // show the game status on the modal
 function modalStats() {
@@ -181,13 +182,14 @@ function modalStats() {
     modalStars.innerHTML = `Stars = ${countStars}`;
     modalTime.innerHTML = `Time = ${timerValue}`;
     modalMoves.innerHTML = `Moves = ${moveCount}`;
-};
+}
 
 // Resete the game and toggle the modal off
 function replayGame() {
     resetGame();
     toggleModal();
-};
+}
+
 // Reset the Game
 function resetGame() {
     resetTimer();
@@ -196,7 +198,7 @@ function resetGame() {
     shuffleDeck();
     resetCards();
     matched = 0;
-}; 
+}
 
 // Reset the timer
 function resetTimer() {
@@ -204,13 +206,13 @@ function resetTimer() {
     timerOff = true;
     time = 0;
     displayTimer();
-};
+}
 
 // Reset the move counter
 function resetMoves() {
     moveCount = 0;
     moveText.innerHTML = moveCount;
-};
+}
 
 // Reset the Stars counter
 function resetStars() {
@@ -218,14 +220,14 @@ function resetStars() {
     for (star of stars) {
         star.style.display = 'inline';
     }
-};
+}
 
 // Reset the cards position
 function resetCards() {
     for (card of cardsList) {
         card.className = 'card';
     }
-};
+}
 
 /*
  * Display the cards on the page

@@ -89,6 +89,7 @@ h1 {
     text-align: left;
     width: 345px;
     margin-bottom: 10px;
+    font-size: 20px;
 }
 
 .score-panel .stars {
@@ -170,4 +171,29 @@ h1 {
     width: 60px;
     height: 30px;
 }
+
+/*
+* Responsive design with media queries
+*/
+
+@media only screen and (max-width: 680px) {
+    .deck {
+        width: 90%;
+        padding: 10px;
+        min-height: 100vw;
+    }
+
+    .deck .card {
+        width: 20vw;
+        height: 20vw;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .score-panel {
+        width: 80%;
+        font-size: 15px;
+    }
+}
+
 

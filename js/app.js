@@ -9,6 +9,7 @@ const stars = document.querySelectorAll('.fa-star');
 const cancelButton = document.querySelector('.modal-cancel');
 const replayButton = document.querySelector('.modal-replay');
 const resetButton = document.querySelector('.fa-repeat');
+const closeButton = document.querySelector('.modal-close');
 const winCount = 8;
 let openCards = [];
 let moveCount = 0;
@@ -50,12 +51,17 @@ cancelButton.addEventListener('click', function() {
     toggleModal();
 });
 replayButton.addEventListener('click', function() {
-    replayGame()
+    replayGame();
 });
 
 // Event listener to handler a click in the "Restart" Button
 resetButton.addEventListener('click', function() {
-    resetGame()
+    resetGame();
+});
+
+// Event listener to handler a click on the X button on the modal
+closeButton.addEventListener('click', function() {
+    toggleModal();
 });
 
 // Shuffle function from http://stackoverflow.com/a/2450976
